@@ -714,6 +714,10 @@ begin
   log_level := TIntegerCvar.Add('log_level', 'Sets log level', 0, 0, [], nil, 0, 3);
   log_enable := TBooleanCvar.Add('log_enable', 'Enables logging to file', False, False, [], nil);
   log_filesupdate := TIntegerCvar.Add('log_filesupdate', 'How often the log files should be updated', 3600, 3600, [], nil, 0, MaxInt);
+
+  // Misc. cvars
+  m_unpackonly := TBooleanCvar.Add('m_unpackonly', 'Unpack files from archive, then quit (used for releases)', False, False, [], nil);
+
   {$IFDEF SERVER}
   log_timestamp := TBooleanCvar.Add('log_timestamp', 'Enables/Disables timestamps in console', False, False, [CVAR_SERVER], nil);
   {$ENDIF}

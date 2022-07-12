@@ -84,6 +84,9 @@ var
   log_level: TIntegerCvar;
   log_filesupdate: TIntegerCvar;
 
+  // Misc. cvars
+  m_unpackonly: TBooleanCvar;
+
   fs_localmount: TBooleanCvar;
   fs_mod: TStringCvar;
   fs_portable: TBooleanCvar;
@@ -711,6 +714,12 @@ begin
 
   PHYSFS_CopyFileFromArchive('configs/client.cfg', UserDirectory + '/configs/client.cfg');
   PHYSFS_CopyFileFromArchive('configs/taunts.cfg', UserDirectory + '/configs/taunts.cfg');
+
+  if m_unpackonly.Value then
+  begin
+    WriteLn('m_unpackonly set to true, quitting.');
+    Exit;
+  end;
 
   LoadConfig('client.cfg');
 

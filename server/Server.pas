@@ -79,6 +79,9 @@ var
   log_filesupdate: TIntegerCvar;
   log_timestamp: TBooleanCvar;
 
+  // Misc. cvars
+  m_unpackonly: TBooleanCvar;
+
   fs_localmount: TBooleanCvar;
   fs_mod: TStringCvar;
   fs_portable: TBooleanCvar;
@@ -637,6 +640,13 @@ begin
 
   for s in PHYSFS_GetEnumeratedFiles('configs/bots') do
     PHYSFS_CopyFileFromArchive('configs/bots/' + s, UserDirectory + '/configs/bots/' + s);
+
+  if m_unpackonly.Value then
+  begin
+    WriteLn('m_unpackonly set to true, quitting.');
+    ProgReady := False;
+    Exit;
+  end;
 
   LoadConfig('server.cfg');
 

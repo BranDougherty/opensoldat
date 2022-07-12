@@ -114,6 +114,9 @@ jobs:
           cmake -G "NMake Makefiles" -DCMAKE_INSTALL_PREFIX=.\opensoldat -DCROSS_WINDOWS_64=1 -DCMAKE_BUILD_TYPE=Release -DCMAKE_TOOLCHAIN_FILE="C:\vcpkg\scripts\buildsystems\vcpkg.cmake"  -DSDL2_BUILDING_LIBRARY=1 ..
           nmake
           nmake install
+          cd opensoldat
+          .\opensoldat.exe -m_unpackonly 1
+          .\opensoldatserver.exe -m_unpackonly 1
         shell: cmd
 
       - uses: actions/upload-artifact@v2
