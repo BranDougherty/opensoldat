@@ -54,15 +54,6 @@ procedure SetSigHooks;
 begin
   SetConsoleCtrlHandler(@ConsoleHandlerRoutine, True);
 end;
-
-procedure ClearSigHooks;
-begin
-  // for some reason, under windows if we caught CTRL+C, it kept looping
-  // My guess is that there are some threads that aren't cleaned up and
-  // windows is waiting for them, so for now we just quit again
-  SetConsoleCtrlHandler(@ConsoleHandlerRoutine, False);
-  GenerateConsoleCtrlEvent(CTRL_C_EVENT, 0);
-end;
 {$ELSE}
 // The linux server can be killed with
 // 'kill -TERM(15) <pid>' or 'kill -QUIT(3) <pid>' and
@@ -254,7 +245,9 @@ begin
   finally
     // Any needed cleanup code here
     ShutDown;
+    {$IFNDEF MSWINDOWS}
     ClearSigHooks;
+    {$ENDIF}
   end;
 end;
 
