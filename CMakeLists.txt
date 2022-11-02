@@ -5,6 +5,7 @@ option(BUILD_CLIENT "Build client" True)
 option(BUILD_SERVER "Build server" True)
 option(BUILD_STEAM "Build steam version" False)
 option(BUILD_GNS "Build GameNetworkingSockets" True)
+option(BUILD_OPENSOLDAT_TESTS "Build OpenSoldat tests" True)
 option(CROSS_LINUX_64 "Cross compile to Linux 64bit" False)
 option(CROSS_LINUX_32 "Cross compile to Linux 32bit" False)
 option(CROSS_WINDOWS_64 "Cross compile to Windows x86_64" False)
@@ -179,6 +180,10 @@ endif()
 
 if(BUILD_SERVER)
   add_subdirectory(server)
+endif()
+
+if(BUILD_OPENSOLDAT_TESTS)
+  add_subdirectory(test)
 endif()
 
 # Install step that does 3 things:
